@@ -14,8 +14,9 @@ curl -X PUT "${S3_ENDPOINT}"/"${BUCKET_NAME}"?website \
     -H "Content-Type: text/xml" \
     -d '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><WebsiteConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><IndexDocument><Suffix>index.html</Suffix></IndexDocument></WebsiteConfiguration>'
 
-curl -X PUT "${S3_ENDPOINT}"/"${BUCKET_NAME}"/index.html \
-    -H "Authorization: Bearer ${IAM_TOKEN}" \
-    -H "ibm-service-instance-id: ${INSTANCE_ID}" \
-    -H "Content-Type: text/html; charset=utf-8" \
-    --data-binary @"$INDEX_FILE"
+resource "ibm_cos_bucket_object" "index_page" {
+  bucket_name = ibm_cos_bucket.static_website_bucket.bucket_name
+  key         = "index.html"
+  content     = var.sample_html_content  # <-- Takes your text input directly
+  content_type = "text/html"
+}
