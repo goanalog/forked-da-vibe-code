@@ -1,0 +1,89 @@
+{
+  "name": "instant-static-site-vibe",
+  "label": "Instant Static Site: Just Pass the Vibe",
+  "description": "Deploy a static site instantly by just pasting your HTML into a text field. No files, no git, just vibes.",
+  "long_description": "You know when you're just vibe coding? You've got a new component, a weird idea, or a snippet from CodePen, and you just want to see it *live*. On a real URL. Right now. This DA lets you paste your HTML code directly into the Schematics input. It spins up a public COS bucket, turns on website mode, and uploads your HTML string as index.html. That's it. You're live.",
+  "type": "solution",
+  "tags": [
+    "static-site",
+    "cos",
+    "schematics",
+    "vibe",
+    "html"
+  ],
+  "features": [
+    {
+      "title": "Paste Your HTML, Get a URL",
+      "description": "No files, no repo. Just copy-paste your code into the text field and hit deploy. Deadass."
+    },
+    {
+      "title": "0 to Live, Instantly",
+      "description": "Goes from a code snippet to a live public URL in minutes. Perfect for testing a bit."
+    },
+    {
+      "title": "Serverless & Low-Key",
+      "description": "Runs on IBM Cloud Object Storage (COS), so you don't have to manage servers. It's cheap and it just works."
+    }
+  ],
+  "configuration": [
+    {
+      "key": "ibmcloud_api_key",
+      "type": "password",
+      "display_name": "IBM Cloud API Key",
+      "description": "Your IBM Cloud API Key.",
+      "required": true,
+      "sensitive": true
+    },
+    {
+      "key": "resource_group",
+      "type": "string",
+      "display_name": "Resource Group",
+      "description": "The resource group to deploy all resources to.",
+      "required": true
+    },
+    {
+      "key": "region",
+      "type": "string",
+      "display_name": "Region",
+      "description": "The IBM Cloud region to deploy in (e.g., 'us-south').",
+      "default": "us-south",
+      "required": true
+    },
+    {
+      "key": "cos_instance_name",
+      "type": "string",
+      "display_name": "Cloud Object Storage Instance Name",
+      "description": "A unique name for your new COS instance.",
+      "required": true
+    },
+    {
+      "key": "cos_bucket_name",
+      "type": "string",
+      "display_name": "Cloud Object Storage Bucket Name",
+      "description": "A unique, globally-unique name for your new COS bucket.",
+      "required": true
+    },
+    {
+      "key": "cos_plan_type",
+      "type": "string",
+      "display_name": "COS Plan Type",
+      "description": "The plan type for your COS instance.",
+      "default": "lite",
+      "required": true
+    },
+    {
+      "key": "sample_html_content",
+      "type": "string",
+      "display_name": "Your HTML Content",
+      "description": "Paste your HTML code here. This will become your live index.html.",
+      "default": "<html><head><title>It works!</title><style>body { font-family: sans-serif; display: grid; place-items: center; min-height: 90vh; background: #222; color: #eee; } h1 { font-weight: 300; }</style></head><body><h1>it's a vibe ✨</h1></body></html>",
+      "required": true
+    }
+  ],
+  "outputs": [
+    {
+      "key": "website_url",
+      "description": "The public URL for your new static site."
+    }
+  ]
+}
