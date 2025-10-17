@@ -6,11 +6,15 @@ module "cos" {
   source                          = "./cos"
   resource_group                  = var.resource_group 
   ibmcloud_api_key                = var.ibmcloud_api_key
-  ibmcloud_iam_endpoint           = local.iam_endpoint
+  # ibmcloud_iam_endpoint (DELETE THIS LINE)
   cos_instance_name               = var.cos_instance_name  
   cos_bucket_name                 = var.cos_bucket_name
-  bucket_location                 = var.region
+  region                          = var.region          # <-- RENAMED THIS
   cos_plan_type                   = var.cos_plan_type
+variable "sample_html_content" {
+  type        = string
+  description = "The HTML code to deploy as a sample index.html page."
+  default     = "<html><body><h1>Hello, World!</h1></body></html>"
 }
 
 module "toolchain" {
